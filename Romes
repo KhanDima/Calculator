@@ -6,6 +6,7 @@ public class Romes extends Number {
     private int romes_value2_int;
     private int result_int;
     private String sign = "";
+    private String error = "";
     private String result_string;
     private final String[] roman_letters_9 = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
 
@@ -15,24 +16,23 @@ public class Romes extends Number {
         this.romes_value1_int = convert_to_int(romes_value1);
         this.romes_value2_int = convert_to_int(romes_value2);
     }
+
     private String convert_result_to_Romes(int n, int ostatok) {
         ostatok = n % 10;
         if (ostatok != 0) {
             try {
                 return convert_result_to_Romes(n - ostatok, 0) + roman_letters_9[ostatok - 1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                sign = "-";
-                return convert_result_to_Romes(n - ostatok, 0) + roman_letters_9[(ostatok + 1) * -1];
+                System.out.println("нельзя");
+                return error;
             }
         }
         //Возможность вывести отрицательное римское число
         if (n > 0) {
             n = n - 10;
             return convert_result_to_Romes(n,0) + "X";
-        } else if (n < 0) {
-            n = n + 10;
-            return convert_result_to_Romes(n,0) + "X";
-        }   else {
+        }
+        else {
             return sign;
         }
     }
